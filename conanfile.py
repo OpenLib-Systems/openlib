@@ -33,6 +33,11 @@ class OpenLibConan(ConanFile):
             self.requires("opencv/4.9.0")
 
     def configure(self):
-        self.options["opencv"].with_ffmpeg = False
+        if self.options.with_vision:
+          self.options["opencv"].with_wayland = False
+          self.options["opencv"].with_x11 = False
+          self.options["opencv"].with_gtk = False
+          self.options["opencv"].with_qt = False
+          self.options["opencv"].with_ffmpeg = False
         self.options["spdlog"].header_only = False
         self.options["spdlog"].use_fmt = True
