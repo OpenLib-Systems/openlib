@@ -4,30 +4,17 @@ set -euo pipefail
 echo "=== Conan profile detect ==="
 conan profile detect --force
 
-BUILD_DIR=build
-CONFIG=Release
-
 echo "=== Conan install ==="
 conan install . \
-  -of ${BUILD_DIR} \
+  -of build \
   -b missing \
-  -s build_type=${CONFIG}
+  -s build_type=Release
 
-TOOLCHAIN_FILE="${BUILD_DIR}/conan_toolchain.cmake"
-
-if [ ! -f "${TOOLCHAIN_FILE}" ]; then
-  echo "ERROR: Conan toolchain not found at ${TOOLCHAIN_FILE}"
-  exit 1
-fi
-
-echo "=== CMake configure (Ninja) ==="
-cmake -S . -B ${BUILD_DIR} \
-  -G Ninja \
-  -DCMAKE_BUILD_TYPE=${CONFIG} \
-  -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN_FILE}
+echo "=== CMake configure via preset ==="
+cmake --preset conan-release
 
 echo "=== Build ==="
-cmake --build ${BUILD_DIR}
+cmake --build --preset conan-release
 
 echo "=== Test ==="
-ctest --test-dir ${BUILD_DIR} --output-on-failure
+ctest --preset conan-release --output-on-failure
