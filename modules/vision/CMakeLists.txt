@@ -32,7 +32,7 @@ target_include_directories(openlib_vision
     $<INSTALL_INTERFACE:include>
 )
 
-find_package(opencv CONFIG REQUIRED)
+find_package(OpenCV CONFIG REQUIRED)
 
 # =========================
 # Dependencies
