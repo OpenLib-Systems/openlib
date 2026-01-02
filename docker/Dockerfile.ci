@@ -1,0 +1,15 @@
+FROM ubuntu:24.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential cmake ninja-build git python3 python3-pip \
+    clang clang-tidy lcov \
+    && rm -rf /var/lib/apt/lists/*
+
+# Conan 2
+RUN pip3 install --break-system-packages conan==2.* && conan --version
+
+WORKDIR /work
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

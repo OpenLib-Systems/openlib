@@ -1,18 +1,29 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# build artifacts
+/build/
+/cmake-build-*/
+/out/
+/.cache/
 
-# Other files and folders
-.settings/
+# Conan
+/conan.lock
+/conan/cache/
+/**/conan-build/
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# IDEs
+/.vscode/
+/.idea/
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# clang tools
+/compile_commands.json
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

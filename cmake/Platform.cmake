@@ -1,0 +1,11 @@
+include_guard(GLOBAL)
+
+if(WIN32)
+  include(${CMAKE_CURRENT_LIST_DIR}/PlatformWindows.cmake)
+elseif(APPLE)
+  include(${CMAKE_CURRENT_LIST_DIR}/PlatformMacOS.cmake)
+elseif(UNIX)
+  include(${CMAKE_CURRENT_LIST_DIR}/PlatformLinux.cmake)
+else()
+  message(FATAL_ERROR "Unsupported platform")
+endif()
